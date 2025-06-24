@@ -19,13 +19,17 @@ const PricingSection = () => {
   const plans = [
     {
       name: "Silver",
-      price: "$199",
+      price: "$99",
       features: [
         { text: "All Free Features", active: true },
         { text: "5 Integrations", active: true },
         { text: "5 Users", active: true },
-        { text: "Two Locations", active: false },
-        { text: "No Server Side Automations", active: false }
+        { text: "Chat GPT Intergration", active: true },
+        { text: "Access to SmartDMS marketplace", active: true },
+        { text: "Multiple Locations", active: false },
+        { text: "No Server Side Automations", active: false },
+        { text: "Unlimited Auction integrations", active: false },
+        { text: "Unlimited Lender & Loan integrations", active: false },
       ],
       buttonClass: "bg-gray-800 hover:bg-gray-700",
     },
@@ -36,8 +40,12 @@ const PricingSection = () => {
         { text: "All Free Features", active: true },
         { text: "10 Integrations", active: true },
         { text: "10 Users", active: true },
+        { text: "Chat GPT Intergration", active: true },
+        { text: "Access to SmartDMS marketplace", active: true },
         { text: "Multiple Locations", active: true },
-        { text: "2 Server Side Automations", active: true }
+        { text: "2 Server Side Automations", active: true },
+        { text: "Unlimited Auction integrations", active: true },
+        { text: "Unlimited Lender & Loan integrations", active: false },
       ],
       buttonClass: "bg-yellow-400 text-black font-semibold hover:bg-yellow-300",
     },
@@ -48,8 +56,12 @@ const PricingSection = () => {
         { text: "All Free Features", active: true },
         { text: "15 Integrations", active: true },
         { text: "15 Users", active: true },
+        { text: "Chat GPT Intergration", active: true },
+        { text: "Access to SmartDMS marketplace", active: true },
         { text: "Multiple Locations", active: true },
-        { text: "4 Server Side Automations", active: true }
+        { text: "4 Server Side Automations", active: true },
+        { text: "Unlimited Auction integrations", active: true },
+        { text: "Unlimited Lender & Loan integrations", active: true },
       ],
       buttonClass: "bg-gray-800 hover:bg-gray-700",
     },
@@ -60,10 +72,10 @@ const PricingSection = () => {
       <h2 className="text-4xl mb-6">
         One Browser. Endless Integrations.
       </h2>
-      <p className="text-gray-400 max-w-xl mx-auto mb-42">
+      <p className="text-gray-400 max-w-xl mx-auto mb-24">
         We believe in providing top-notch services to cater to your unique requirements. That's why we offer a range of carefully crafted pricing plans designed to suit businesses of all sizes.
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-8 min-h-164 py-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-[1600px] mx-auto px-8 min-h-164 py-8">
         {plans.map((plan, i) => (
           <div
             key={i}

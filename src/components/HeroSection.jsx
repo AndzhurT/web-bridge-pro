@@ -49,7 +49,7 @@ const HeroSection = () => {
             Smarter Workflows for Independent Dealers
           </h1>
           <p className="text-lg text-gray-200 max-w-xl mb-10">
-            AI-Powered Browser Integrations That Save You Time, Cut Errors, and Drive Growth
+            AI-Powered Browser Integrations That Save You Time, Eliminates Errors, and Drive Growth
           </p>
           <div className="space-x-4 mt-10 mb-10">
             <a
@@ -90,7 +90,7 @@ const HeroSection = () => {
         </div>
         <div className="text-center">
             <p className="text-sm text-gray-500 font-semibold italic">
-                Built with BPI: Secure, Seamless, Smart
+                Built with BPI Technology: Secure, Seamless, Smart
             </p>
         </div>
       </div>

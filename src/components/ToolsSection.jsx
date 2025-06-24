@@ -82,9 +82,9 @@ const ToolsSection = () => {
         {/* --- Bottom Section --- */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-10 mt-10">
           <div className="flex flex-col text-center md:text-left md:ml-10 order-2 md:order-1">
-            <h2 className="text-4xl mb-4">Limited Edition</h2>
+            <h2 className="text-4xl mb-4">Backed by Giants</h2>
             <p className="mb-8 text-black max-w-md text-2lg">
-              Trusted by 300+ Dealerships · 99.9% Uptime · Microsoft Certified
+              Microsoft and Apple Certified! Built from the ground up to serve both Franchise and Inpendent Auto Dealerships nationwide!
             </p>
           </div>
           <div className="flex flex-col md:flex-row items-start justify-center bg-[#F7F7F7] p-6 md:pl-10 md:pr-10 w-full md:w-1/2 rounded-lg order-1 md:order-2">

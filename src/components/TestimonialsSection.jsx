@@ -11,25 +11,25 @@ const TestimonialsSection = () => {
     {
       name: "Sarah Thompson",
       title: "Independent Auto Dealer",
-      quote: "WebBridgePro has transformed our workflow! The instant DMS-to-vendor portal connection saves us hours each week, simplifying listings, syncing with vendors, handling our day-to-day, and it's all without leaving our browser!",
+      quote: "WebBridge Pro has transformed our workflow! The instant DMS-to-vendor portal connection saves us hours each week, simplifying listings, syncing with vendors, handling our day-to-day, and it's all without leaving our browser!",
       avatar: "/testimonials/sarah_thompson.png"
     },
     {
       name: "John Roberts",
       title: "E-commerce Owner", 
-      quote: "We tried various platforms before coming across WebBridgePro, and none of them could match the level of personalization and ease of use that this software offers. The setup was quick, and the support team was there every step of the way!",
+      quote: "We tried various platforms before coming across WebBridge Pro, and none of them could match the level of personalization and ease of use that this software offers. The setup was quick, and the support team was there every step of the way!",
       avatar: "/testimonials/john_roberts.png"
     },
     {
       name: "Emily Parker",
       title: "Non-profit Coordinator",
-      quote: "As a non-profit organization, our resources are limited, and we often have to rely on automations. WebBridgePro lets me focus on sales instead of repetitive tasks and has been a game-changer for us.",
+      quote: "As a non-profit organization, our resources are limited, and we often have to rely on automations. WebBridge Pro lets me focus on sales instead of repetitive tasks and has been a game-changer for us.",
       avatar: "/testimonials/emily_parker.png"
     },
     {
       name: "Michael Chen",
       title: "Fleet Manager",
-      quote: "The integration capabilities are incredible! We've connected our inventory management, customer CRM, and accounting software all through WebBridgePro. What used to take our team hours of manual data entry now happens automatically in real-time.",
+      quote: "The integration capabilities are incredible! We've connected our inventory management, customer CRM, and accounting software all through WebBridge Pro. What used to take our team hours of manual data entry now happens automatically in real-time.",
       avatar: "/testimonials/michael_chen.jpg" 
     },
   ];
@@ -117,13 +117,13 @@ const TestimonialsSection = () => {
         
         <h2 className="text-4xl font-bold mb-4">
           See what people are saying<br />
-          about WebBridgePro
+          about WebBridge Pro
         </h2>
         
         <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
-          At WebBridgePro, we take immense pride in delivering a cutting-edge browser integration solution 
+          At WebBridge Pro, we take immense pride in delivering a cutting-edge browser integration solution 
           that empowers businesses to achieve unparalleled efficiency. But don't just take our word for it – 
-          listen to what our valued users have to say about their experience with WebBridgePro!
+          listen to what our valued users have to say about their experience with WebBridge Pro!
         </p>
 
         {/* Testimonials Carousel */}

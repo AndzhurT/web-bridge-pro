@@ -22,7 +22,7 @@ const FeaturesSection = () => {
         Lots of extra features, <br /> enhancing your experience
       </h2>
       <p className="text-gray-400 max-w-xl mx-auto mb-12">
-      With our automated browser solutions, you can say goodbye to tedious manual tasks and hello to efficiency and productivity. Our platform empowers you to automate every aspect of your dealership workflow.
+      With our AI-Powered browser, you can say goodbye to tedious, repetitive tasks and hello to efficiency and productivity.  WebBridge is the world’s 1st browser platform to empower you to Integrate and Automate every aspect of your dealership’s workflow.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-8 max-w-6xl mx-auto my-40 justify-items-end">
         {features.map(({ title, desc }, i) => (

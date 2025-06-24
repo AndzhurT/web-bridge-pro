@@ -52,12 +52,12 @@ const FooterSection = () => {
       <div className="max-w-6xl mx-auto px-8">
         <div className="flex flex-col md:flex-row justify-between items-start space-y-8 md:space-y-0">
           {/* Brand Section */}
-          <div className="md:flex-1 md:pr-8">
-            <h4 className="text-2xl font-bold mb-2">WebBridgePro</h4>
+          <div className="md:flex-1 md:pr-8 space-y-2">
+            <img src="/images/web_bridge.png" alt="WebBridgePro" className="h-6" />
             <p className="text-gray-400 text-sm mb-4 max-w-sm">
               Empowering businesses with cutting-edge browser integration solutions for unparalleled efficiency.
             </p>
-            <p className="text-xs text-gray-500">© WebBridgePro Inc 2025</p>
+            <p className="text-xs text-gray-500">© WebBridge Pro Inc 2025</p>
           </div>
 
           {/* Right Column: Links and Social */}

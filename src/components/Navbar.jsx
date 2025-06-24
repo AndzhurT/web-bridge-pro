@@ -25,8 +25,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <img src="/images/WB-logo.png" alt="WebBridgePro" className="h-6" />
-            <span className="text-lg sm:text-xl font-bold text-white">WebBridgePro</span>
+            <img src="/images/web_bridge.png" alt="WebBridgePro" className="h-6" />
           </div>
 
           {/* Desktop Navigation */}
