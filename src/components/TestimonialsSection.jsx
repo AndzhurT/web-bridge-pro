@@ -36,31 +36,31 @@ const TestimonialsSection = () => {
       name: "David Rodriguez",
       title: "Car Lot Owner",
       quote: "Before WebBridge Pro, managing multiple auction platforms was a nightmare. Now everything syncs perfectly with our DMS, and we can track bids, manage inventory, and handle financing all from one place. Our efficiency has increased by 300%!",
-      avatar: "/testimonials/sarah_thompson.png"
+      avatar: "/testimonials/david_rodriguez.jpg"
     },
     {
       name: "Lisa Martinez",
       title: "Dealership Operations Manager",
       quote: "The ChatGPT integration is brilliant! It helps us respond to customer inquiries instantly and generates detailed vehicle descriptions automatically. Our sales team loves how it handles routine questions while they focus on closing deals.",
-      avatar: "/testimonials/emily_parker.png"
+      avatar: "/testimonials/lisa_martinez.jpg"
     },
     {
       name: "Robert Johnson",
       title: "Used Car Sales Director",
       quote: "WebBridge Pro's connection to state dealer associations has streamlined our compliance reporting. What used to take days of paperwork now happens automatically. The peace of mind knowing we're always compliant is invaluable.",
-      avatar: "/testimonials/john_roberts.png"
+      avatar: "/testimonials/robert_johnson.jpg"
     },
     {
       name: "Amanda Foster",
       title: "Automotive Finance Manager",
       quote: "The unlimited lender integrations in the Platinum plan have revolutionized our financing process. We can compare rates from dozens of lenders instantly and get approvals in minutes instead of hours. Our customers are amazed!",
-      avatar: "/testimonials/sarah_thompson.png"
+      avatar: "/testimonials/amanda_foster.jpg"
     },
     {
       name: "Carlos Gutierrez",
       title: "Multi-Location Dealer Principal",
       quote: "Managing 5 dealership locations was chaos before WebBridge Pro. Now I have real-time visibility across all locations, unified reporting, and centralized inventory management. It's like having a command center for my entire operation.",
-      avatar: "/testimonials/michael_chen.jpg"
+      avatar: "/testimonials/carlos_gutierrez.jpg"
     }
   ];
 
