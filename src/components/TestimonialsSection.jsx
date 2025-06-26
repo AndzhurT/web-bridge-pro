@@ -32,6 +32,36 @@ const TestimonialsSection = () => {
       quote: "The integration capabilities are incredible! We've connected our inventory management, customer CRM, and accounting software all through WebBridge Pro. What used to take our team hours of manual data entry now happens automatically in real-time.",
       avatar: "/testimonials/michael_chen.jpg" 
     },
+    {
+      name: "David Rodriguez",
+      title: "Car Lot Owner",
+      quote: "Before WebBridge Pro, managing multiple auction platforms was a nightmare. Now everything syncs perfectly with our DMS, and we can track bids, manage inventory, and handle financing all from one place. Our efficiency has increased by 300%!",
+      avatar: "/testimonials/sarah_thompson.png"
+    },
+    {
+      name: "Lisa Martinez",
+      title: "Dealership Operations Manager",
+      quote: "The ChatGPT integration is brilliant! It helps us respond to customer inquiries instantly and generates detailed vehicle descriptions automatically. Our sales team loves how it handles routine questions while they focus on closing deals.",
+      avatar: "/testimonials/emily_parker.png"
+    },
+    {
+      name: "Robert Johnson",
+      title: "Used Car Sales Director",
+      quote: "WebBridge Pro's connection to state dealer associations has streamlined our compliance reporting. What used to take days of paperwork now happens automatically. The peace of mind knowing we're always compliant is invaluable.",
+      avatar: "/testimonials/john_roberts.png"
+    },
+    {
+      name: "Amanda Foster",
+      title: "Automotive Finance Manager",
+      quote: "The unlimited lender integrations in the Platinum plan have revolutionized our financing process. We can compare rates from dozens of lenders instantly and get approvals in minutes instead of hours. Our customers are amazed!",
+      avatar: "/testimonials/sarah_thompson.png"
+    },
+    {
+      name: "Carlos Gutierrez",
+      title: "Multi-Location Dealer Principal",
+      quote: "Managing 5 dealership locations was chaos before WebBridge Pro. Now I have real-time visibility across all locations, unified reporting, and centralized inventory management. It's like having a command center for my entire operation.",
+      avatar: "/testimonials/michael_chen.jpg"
+    }
   ];
 
   const handleMouseDown = (e) => {
@@ -49,55 +79,114 @@ const TestimonialsSection = () => {
     }
   };
 
+  const snapToNearestGroup = () => {
+    const container = containerRef.current;
+    if (!container) return;
+    
+    const cardWidth = 320;
+    const gap = 32;
+    const totalCardWidth = cardWidth + gap;
+    const scrollLeft = container.scrollLeft;
+    
+    // Very sensitive threshold for snapping (15% threshold)
+    const currentTestimonialIndex = Math.floor((scrollLeft + totalCardWidth * 0.15) / totalCardWidth);
+    const dotIndex = Math.floor(currentTestimonialIndex / 3);
+    const validDotIndex = Math.max(0, Math.min(2, dotIndex)); // 3 dots (0-2)
+    
+    // Calculate the exact scroll position for this group
+    const targetScrollPosition = validDotIndex * 3 * totalCardWidth;
+    
+    // Smooth scroll to the target position
+    container.scrollTo({
+      left: targetScrollPosition,
+      behavior: 'smooth'
+    });
+    
+    setCurrentSlide(validDotIndex);
+  };
+
   const handleMouseUp = () => {
     setIsDragging(false);
     if (containerRef.current) {
       containerRef.current.style.cursor = 'grab';
     }
+    // Snap to nearest group after mouse drag ends (faster response)
+    setTimeout(() => {
+      snapToNearestGroup();
+    }, 50);
   };
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
     e.preventDefault();
     const x = e.pageX - containerRef.current.offsetLeft;
-    const walk = (x - startX) * 2;
+    const walk = (x - startX) * 3; // Increased sensitivity from 2 to 3
     containerRef.current.scrollLeft = scrollLeft - walk;
   };
 
-  const handleDotClick = (index) => {
-    setCurrentSlide(index);
+  // Touch event handlers for mobile
+  const handleTouchStart = (e) => {
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - containerRef.current.offsetLeft);
+    setScrollLeft(containerRef.current.scrollLeft);
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    // Snap to nearest group after touch drag ends (faster response)
+    setTimeout(() => {
+      snapToNearestGroup();
+    }, 50);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging) return;
+    const x = e.touches[0].pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX) * 2.5; // Increased sensitivity for mobile
+    containerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleDotClick = (dotIndex) => {
     const container = containerRef.current;
-    const containerWidth = container.offsetWidth;
     const cardWidth = 320; // Fixed card width
     const gap = 32; // 8 * 4px (gap-8)
     const totalCardWidth = cardWidth + gap;
     
-    // Calculate scroll position to show 3 cards starting from the selected index
-    let scrollPosition = 0;
-    if (index > 0) {
-      scrollPosition = (totalCardWidth * index) - (containerWidth - (cardWidth * 3 + gap * 2)) / 2;
-    }
+    // Each dot represents 3 testimonials
+    const startingTestimonialIndex = dotIndex * 3;
+    setCurrentSlide(dotIndex);
+    
+    // Calculate scroll position to show the first card of the group
+    const scrollPosition = startingTestimonialIndex * totalCardWidth;
     
     container.scrollTo({
-      left: Math.max(0, scrollPosition),
+      left: scrollPosition,
       behavior: 'smooth'
     });
   };
 
   useEffect(() => {
     const handleScroll = () => {
+      if (isDragging) return; // Don't update dots while dragging
+      
       const container = containerRef.current;
-      const containerWidth = container.offsetWidth;
+      if (!container) return;
+      
       const cardWidth = 320;
       const gap = 32;
       const totalCardWidth = cardWidth + gap;
       
-      // Calculate which testimonial is most centered
+      // Calculate which group of 3 testimonials is being viewed (very sensitive threshold)
       const scrollLeft = container.scrollLeft;
-      const centerPosition = scrollLeft + containerWidth / 2;
-      const newSlide = Math.round((centerPosition - cardWidth / 2) / totalCardWidth);
+      const currentTestimonialIndex = Math.floor((scrollLeft + totalCardWidth * 0.05) / totalCardWidth);
+      const dotIndex = Math.floor(currentTestimonialIndex / 3);
       
-      setCurrentSlide(Math.max(0, Math.min(testimonials.length - 1, newSlide)));
+      // Ensure dot index is within bounds (0-2) for 3 dots
+      const validDotIndex = Math.max(0, Math.min(2, dotIndex));
+      
+      if (validDotIndex !== currentSlide) {
+        setCurrentSlide(validDotIndex);
+      }
     };
 
     const container = containerRef.current;
@@ -105,7 +194,7 @@ const TestimonialsSection = () => {
       container.addEventListener('scroll', handleScroll);
       return () => container.removeEventListener('scroll', handleScroll);
     }
-  }, [testimonials.length]);
+  }, [isDragging, currentSlide]);
 
   return (
     <section id="testimonials" className="bg-white text-black py-16">
@@ -130,27 +219,41 @@ const TestimonialsSection = () => {
         <div className="max-w-5xl mx-auto mb-8">
           <div 
             ref={containerRef}
-            className="overflow-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none"
+            className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none transition-all duration-300"
             onMouseDown={handleMouseDown}
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
             onMouseMove={handleMouseMove}
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onTouchMove={handleTouchMove}
+            style={{ 
+              scrollbarWidth: 'none', 
+              msOverflowStyle: 'none',
+              scrollSnapType: 'x mandatory',
+              scrollBehavior: 'smooth'
+            }}
           >
-            <div className="flex gap-8 w-max transition-transform duration-300">
+            <div className="flex gap-8 w-max transition-all duration-500 ease-out">
               {testimonials.map(({ name, title, quote, avatar }, i) => (
-                <div key={i} className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-80 flex-shrink-0 flex flex-col mb-6">
-                  <p className="text-gray-700 mb-6 text-left leading-relaxed flex-grow">{quote}</p>
+                <div 
+                  key={i} 
+                  className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-80 flex-shrink-0 flex flex-col mb-6 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1"
+                  style={{ 
+                    scrollSnapAlign: i % 3 === 0 ? 'start' : 'none'
+                  }}
+                >
+                  <p className="text-gray-700 mb-6 text-left leading-relaxed flex-grow transition-colors duration-200 hover:text-gray-800">{quote}</p>
                   
-                  <div className="flex items-center mt-auto ">
+                  <div className="flex items-center mt-auto">
                     <img 
                       src={avatar} 
                       alt={name}
-                      className="w-12 h-12 rounded-full mr-4 object-cover"
+                      className="w-12 h-12 rounded-full mr-4 object-cover transition-transform duration-200 hover:scale-110"
                     />
                     <div className="text-left">
-                      <p className="font-semibold text-black">{name}</p>
-                      <p className="text-[#FF8700] text-sm">{title}</p>
+                      <p className="font-semibold text-black transition-colors duration-200">{name}</p>
+                      <p className="text-[#FF8700] text-sm transition-colors duration-200">{title}</p>
                     </div>
                   </div>
                 </div>
@@ -161,14 +264,14 @@ const TestimonialsSection = () => {
 
         {/* Interactive Carousel Dots */}
         <div className="flex justify-center space-x-2">
-          {testimonials.map((_, index) => (
+          {Array.from({ length: 3 }).map((_, index) => (
             <button
               key={index}
               onClick={() => handleDotClick(index)}
-              className={`h-2 rounded-full transition-all duration-300 ${
+              className={`h-2 rounded-full transition-all duration-500 ease-out transform hover:scale-125 ${
                 currentSlide === index 
-                  ? "w-8 bg-black" 
-                  : "w-2 bg-gray-300 hover:bg-gray-400"
+                  ? "w-8 bg-black shadow-md" 
+                  : "w-2 bg-gray-300 hover:bg-gray-400 hover:shadow-sm"
               }`}
             />
           ))}
