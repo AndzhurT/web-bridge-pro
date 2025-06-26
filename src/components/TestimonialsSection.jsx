@@ -168,6 +168,25 @@ const TestimonialsSection = () => {
   };
 
   useEffect(() => {
+    const updateScrollSnap = () => {
+      const container = containerRef.current;
+      if (!container) return;
+      
+      // Update scroll snap based on screen size
+      const isMobile = window.innerWidth < 768;
+      container.style.scrollSnapType = isMobile ? 'none' : 'x mandatory';
+      
+      // Update snap align for cards
+      const cards = container.querySelectorAll('.testimonial-card');
+      cards.forEach((card, index) => {
+        if (isMobile) {
+          card.style.scrollSnapAlign = 'none';
+        } else {
+          card.style.scrollSnapAlign = index % 3 === 0 ? 'start' : 'none';
+        }
+      });
+    };
+
     const handleScroll = () => {
       if (isDragging) return; // Don't update dots while dragging
       
@@ -196,8 +215,13 @@ const TestimonialsSection = () => {
 
     const container = containerRef.current;
     if (container) {
+      updateScrollSnap();
       container.addEventListener('scroll', handleScroll);
-      return () => container.removeEventListener('scroll', handleScroll);
+      window.addEventListener('resize', updateScrollSnap);
+      return () => {
+        container.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('resize', updateScrollSnap);
+      };
     }
   }, [isDragging, currentSlide]);
 
@@ -224,7 +248,7 @@ const TestimonialsSection = () => {
         <div className="max-w-5xl mx-auto mb-8">
           <div 
             ref={containerRef}
-            className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none transition-all duration-300 md:scroll-snap-x-mandatory"
+            className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none transition-all duration-300"
             onMouseDown={handleMouseDown}
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
@@ -242,10 +266,7 @@ const TestimonialsSection = () => {
               {testimonials.map(({ name, title, quote, avatar }, i) => (
                 <div 
                   key={i} 
-                  className="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 w-72 md:w-80 flex-shrink-0 flex flex-col mb-6 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1"
-                  style={{ 
-                    scrollSnapAlign: window.innerWidth >= 768 && i % 3 === 0 ? 'start' : 'none'
-                  }}
+                  className="testimonial-card bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 w-72 md:w-80 flex-shrink-0 flex flex-col mb-6 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1"
                 >
                   <p className="text-gray-700 mb-6 text-left leading-relaxed flex-grow transition-colors duration-200 hover:text-gray-800">{quote}</p>
                   
