@@ -45,9 +45,9 @@ const PlanComparisonModal = ({ isOpen, onClose }) => {
       className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
       onClick={handleBackdropClick}
     >
-      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-          <h3 className="text-2xl font-bold text-gray-900">Compare Plans</h3>
+      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto mx-4 md:mx-0">
+        <div className="p-4 md:p-6 border-b border-gray-200 flex justify-between items-center">
+          <h3 className="text-xl md:text-2xl font-bold text-gray-900">Compare Plans</h3>
           <button 
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700 text-2xl"
@@ -55,33 +55,33 @@ const PlanComparisonModal = ({ isOpen, onClose }) => {
             ×
           </button>
         </div>
-        <div className="p-6">
+        <div className="p-4 md:p-6">
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full min-w-[600px]">
               <thead>
                 <tr className="border-b border-gray-200">
-                  <th className="text-left py-3 px-4 font-semibold text-gray-900">Feature</th>
-                  <th className="text-center py-3 px-4 font-semibold text-gray-700">Silver ($99/mo)</th>
-                  <th className="text-center py-3 px-4 font-semibold text-yellow-600">Gold ($399/mo)</th>
-                  <th className="text-center py-3 px-4 font-semibold text-gray-800">Platinum ($599/mo)</th>
+                  <th className="text-left py-2 md:py-3 px-2 md:px-4 font-semibold text-gray-900 text-sm md:text-base">Feature</th>
+                  <th className="text-center py-2 md:py-3 px-2 md:px-4 font-semibold text-gray-700 text-xs md:text-sm">Silver<br className="md:hidden"/><span className="hidden md:inline"> ($99/mo)</span></th>
+                  <th className="text-center py-2 md:py-3 px-2 md:px-4 font-semibold text-yellow-600 text-xs md:text-sm">Gold<br className="md:hidden"/><span className="hidden md:inline"> ($399/mo)</span></th>
+                  <th className="text-center py-2 md:py-3 px-2 md:px-4 font-semibold text-gray-800 text-xs md:text-sm">Platinum<br className="md:hidden"/><span className="hidden md:inline"> ($599/mo)</span></th>
                 </tr>
               </thead>
               <tbody>
                 {comparisonData.map((row, index) => (
                   <tr key={index} className="border-b border-gray-100">
-                    <td className="py-3 px-4 text-gray-900">{row.feature}</td>
-                    <td className="py-3 px-4 text-center text-gray-700">{row.silver}</td>
-                    <td className="py-3 px-4 text-center text-gray-700">{row.gold}</td>
-                    <td className="py-3 px-4 text-center text-gray-700">{row.platinum}</td>
+                    <td className="py-2 md:py-3 px-2 md:px-4 text-gray-900 text-sm md:text-base">{row.feature}</td>
+                    <td className="py-2 md:py-3 px-2 md:px-4 text-center text-gray-700 text-sm md:text-base">{row.silver}</td>
+                    <td className="py-2 md:py-3 px-2 md:px-4 text-center text-gray-700 text-sm md:text-base">{row.gold}</td>
+                    <td className="py-2 md:py-3 px-2 md:px-4 text-center text-gray-700 text-sm md:text-base">{row.platinum}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="mt-6 flex justify-center space-x-4">
+          <div className="mt-4 md:mt-6 flex justify-center">
             <button 
               onClick={onClose}
-              className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors"
+              className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors w-full md:w-auto"
             >
               Close
             </button>

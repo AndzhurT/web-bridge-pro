@@ -110,7 +110,7 @@ const TestimonialsSection = () => {
     if (containerRef.current) {
       containerRef.current.style.cursor = 'grab';
     }
-    // Snap to nearest group after mouse drag ends (faster response)
+    // Always snap on desktop mouse interactions
     setTimeout(() => {
       snapToNearestGroup();
     }, 50);
@@ -133,10 +133,12 @@ const TestimonialsSection = () => {
 
   const handleTouchEnd = () => {
     setIsDragging(false);
-    // Snap to nearest group after touch drag ends (faster response)
-    setTimeout(() => {
-      snapToNearestGroup();
-    }, 50);
+    // Only snap on desktop, allow free scrolling on mobile
+    if (window.innerWidth >= 768) {
+      setTimeout(() => {
+        snapToNearestGroup();
+      }, 50);
+    }
   };
 
   const handleTouchMove = (e) => {
@@ -171,6 +173,9 @@ const TestimonialsSection = () => {
       
       const container = containerRef.current;
       if (!container) return;
+      
+      // Only update dots on desktop where snapping is enabled
+      if (window.innerWidth < 768) return;
       
       const cardWidth = 320;
       const gap = 32;
@@ -219,7 +224,7 @@ const TestimonialsSection = () => {
         <div className="max-w-5xl mx-auto mb-8">
           <div 
             ref={containerRef}
-            className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none transition-all duration-300"
+            className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none transition-all duration-300 md:scroll-snap-x-mandatory"
             onMouseDown={handleMouseDown}
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
@@ -230,7 +235,6 @@ const TestimonialsSection = () => {
             style={{ 
               scrollbarWidth: 'none', 
               msOverflowStyle: 'none',
-              scrollSnapType: 'x mandatory',
               scrollBehavior: 'smooth'
             }}
           >
@@ -238,9 +242,9 @@ const TestimonialsSection = () => {
               {testimonials.map(({ name, title, quote, avatar }, i) => (
                 <div 
                   key={i} 
-                  className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 w-80 flex-shrink-0 flex flex-col mb-6 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1"
+                  className="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 w-72 md:w-80 flex-shrink-0 flex flex-col mb-6 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1"
                   style={{ 
-                    scrollSnapAlign: i % 3 === 0 ? 'start' : 'none'
+                    scrollSnapAlign: window.innerWidth >= 768 && i % 3 === 0 ? 'start' : 'none'
                   }}
                 >
                   <p className="text-gray-700 mb-6 text-left leading-relaxed flex-grow transition-colors duration-200 hover:text-gray-800">{quote}</p>
@@ -262,8 +266,8 @@ const TestimonialsSection = () => {
           </div>
         </div>
 
-        {/* Interactive Carousel Dots */}
-        <div className="flex justify-center space-x-2">
+        {/* Interactive Carousel Dots - Hidden on mobile */}
+        <div className="hidden md:flex justify-center space-x-2">
           {Array.from({ length: 3 }).map((_, index) => (
             <button
               key={index}
