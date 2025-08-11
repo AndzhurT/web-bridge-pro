@@ -6,6 +6,7 @@ import ToolsSection from "./components/ToolsSection";
 import PricingSection from "./components/PricingSection";
 import TestimonialsSection from "./components/TestimonialsSection";
 import FooterSection from "./components/FooterSection";
+import ChatBot from "./components/ChatBot";
 
 const App = () => {
   return (
@@ -29,6 +30,9 @@ const App = () => {
       <div id="contact" className="scroll-mt-24">
         <FooterSection />
       </div>
+      
+      {/* Floating AI Chatbot */}
+      <ChatBot />
     </div>
   );
 };
