@@ -2,7 +2,9 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import FeaturesSection from "./components/FeaturesSection";
-import ToolsSection from "./components/ToolsSection";
+// import ToolsSection from "./components/ToolsSection";
+import NewToolsSection from "./components/NewToolsSection";
+
 import PricingSection from "./components/PricingSection";
 import TestimonialsSection from "./components/TestimonialsSection";
 import FooterSection from "./components/FooterSection";
@@ -18,8 +20,11 @@ const App = () => {
       <div id="features" className="scroll-mt-24">
         <FeaturesSection />
       </div>
+      {/* <div id="tools" className="scroll-mt-24">
+            <ToolsSection />
+        </div> */}
       <div id="tools" className="scroll-mt-24">
-        <ToolsSection />
+        <NewToolsSection />
       </div>
       <div id="pricing" className="scroll-mt-24">
         <PricingSection />

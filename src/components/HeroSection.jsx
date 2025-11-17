@@ -32,38 +32,58 @@ const HeroSection = () => {
 
   return (
     <>
-      <section
-        className="relative h-screen bg-cover bg-center"
-        style={{
-          backgroundImage: `
-            linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,1) 100%),
-            url('/images/hero-bg.jpg')
-          `
-        }}
-      >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/30"></div>
-        {/* Content */}
-        <div className="relative z-10 flex flex-col items-center justify-end h-full text-center px-4">
-          <h1 className="text-4xl md:text-5xl mb-4 text-white max-w-2xl">
-            Smarter Workflows for Independent Dealers
-          </h1>
-          <p className="text-lg text-gray-200 max-w-xl mb-10">
-            AI-Powered Browser Integrations That Save You Time, Eliminates Errors, and Drive Growth
-          </p>
-          <div className="space-x-4 mt-10 mb-10">
-            <a
-              href="#contact"
-              className="bg-[#F49F1C] text-black px-10 py-3 rounded-full hover:bg-[#EC8C66] transition-colors duration-200"
-            >
-              Contact Us
-            </a>
-            <a
-              href="#features"
-              className="border border-white px-10 py-3 rounded-full text-white hover:bg-white hover:text-black transition-colors duration-200"
-            >
-              Learn More
-            </a>
+      <section className="relative bg-black overflow-hidden py-16 px-4 pt-40">
+        {/* Orange Ellipse Background */}
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[120px]"
+          style={{
+            background: 'rgba(255, 135, 0, 0.3)',
+            opacity: 1,
+          }}
+        ></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto">
+          {/* Content */}
+          <div className="flex flex-col items-center text-center px-4 pt-20 pb-20">
+            <h1 className="text-4xl md:text-5xl mb-4 text-white max-w-2xl">
+              Smarter Workflows for Independent Dealers
+            </h1>
+            <p className="text-lg text-gray-200 max-w-xl mb-10">
+              AI-Powered Browser Integrations That Save You Time, Eliminates Errors, and Drive Growth
+            </p>
+            <div className="space-x-4 mt-10 mb-10">
+              <a
+                href="#contact"
+                className="bg-[#F49F1C] text-black px-10 py-3 rounded-full hover:bg-[#EC8C66] transition-colors duration-200"
+              >
+                Contact Us
+              </a>
+              <a
+                href="#features"
+                className="border border-white px-10 py-3 rounded-full text-white hover:bg-white hover:text-black transition-colors duration-200"
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+
+          {/* Image */}
+          <div className="relative px-4 pb-10 flex justify-center">
+            <div className="relative w-full max-w-4xl">
+              {/* Shadow Layer Behind */}
+              <div className="absolute inset-0 bg-[#F49F1C] opacity-20 blur-3xl rounded-lg transform translate-y-4 translate-x-4"></div>
+              
+              {/* Main Image Container */}
+              <div className="relative overflow-hidden rounded-lg border-2 border-gray-800 shadow-2xl">
+                <img 
+                  src="/webbridge/WB_MainScreen.JPG" 
+                  alt="Web Bridge Dashboard" 
+                  className="w-full"
+                />
+                {/* Gradient Overlay on Bottom */}
+                <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black to-transparent"></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
