@@ -48,7 +48,7 @@ const HeroSection = () => {
             <h1 className="text-4xl md:text-5xl mb-4 text-white max-w-2xl">
               Smarter Workflows for Independent Dealers
             </h1>
-            <p className="text-lg text-gray-200 max-w-xl mb-10">
+            <p className="text-lg text-gray-200 max-w-xl mb-5">
               AI-Powered Browser Integrations That Save You Time, Eliminates Errors, and Drive Growth
             </p>
             <div className="space-x-4 mt-10 mb-10">
