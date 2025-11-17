@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 const NewToolsSection = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const elements = sectionRef.current?.querySelectorAll('.fade-in-element');
+    
+    elements?.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div id="tools" className="bg-black text-white px-4 md:px-8 lg:px-16 py-4">
+    <div id="tools" className="bg-black text-white px-4 md:px-8 lg:px-16 py-4" ref={sectionRef}>
       <div className="max-w-7xl mx-auto">
         
         {/* First Section */}
         <section className="mb-20">
           {/* Section Title */}
-          <div className="mb-8">
+          <div className="mb-8 fade-in-element opacity-0 translate-y-8 transition-all duration-700">
             <h2 className="text-4xl font-bold text-white">
               Intelligent automation at your fingertips
             </h2>
@@ -18,7 +42,7 @@ const NewToolsSection = () => {
           <div className="grid grid-cols-1 gap-8 md:gap-16 md:grid-cols-2">
           
           {/* Card 1 - Address Bar Integrations */}
-          <div className="relative rounded-2xl flex flex-col overflow-hidden pt-4 pb-4">
+          <div className="relative rounded-2xl flex flex-col overflow-hidden pt-4 pb-4 fade-in-element opacity-0 translate-y-8 transition-all duration-700 delay-100">
             <div className="flex-1 mb-6">
               {/* Icon */}
               <div className="mb-4 text-left w-5 h-5 text-[#F49F1C]">
@@ -75,7 +99,7 @@ const NewToolsSection = () => {
           </div>
 
           {/* Card 2 - Specialized Window Hub */}
-          <div className="relative rounded-2xl flex flex-col overflow-hidden pt-4 pb-4">
+          <div className="relative rounded-2xl flex flex-col overflow-hidden pt-4 pb-4 fade-in-element opacity-0 translate-y-8 transition-all duration-700 delay-200">
             <div className="flex-1 mb-6">
               {/* Icon */}
               <div className="mb-4 text-left w-5 h-5 text-[#F49F1C]">
@@ -130,7 +154,7 @@ const NewToolsSection = () => {
         {/* Second Section */}
         <section className="mb-20">
           {/* Section Title */}
-          <div className="mb-8">
+          <div className="mb-8 fade-in-element opacity-0 translate-y-8 transition-all duration-700">
             <h2 className="text-4xl font-bold text-white">
               Connect everything your dealership needs
             </h2>
@@ -140,7 +164,7 @@ const NewToolsSection = () => {
           <div className="grid grid-cols-1 gap-8 md:gap-16 md:grid-cols-2">
           
           {/* Card 3 - Smart DMS Marketplace */}
-          <div className="relative rounded-2xl flex flex-col overflow-hidden pt-4 pb-4">
+          <div className="relative rounded-2xl flex flex-col overflow-hidden pt-4 pb-4 fade-in-element opacity-0 translate-y-8 transition-all duration-700 delay-100">
             <div className="flex-1 mb-6">
               {/* Icon */}
               <div className="mb-4 text-left w-5 h-5 text-[#F49F1C]">
@@ -179,7 +203,7 @@ const NewToolsSection = () => {
           </div>
 
           {/* Card 4 - Universal Integrations to Any Web Resources */}
-          <div className="relative rounded-2xl flex flex-col overflow-hidden pt-4 pb-4">
+          <div className="relative rounded-2xl flex flex-col overflow-hidden pt-4 pb-4 fade-in-element opacity-0 translate-y-8 transition-all duration-700 delay-200">
             <div className="flex-1 mb-6">
               {/* Icon */}
               <div className="mb-4 text-left w-5 h-5 text-[#F49F1C]">
