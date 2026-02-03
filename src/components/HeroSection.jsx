@@ -1,7 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import EnrollmentForm from "./EnrollmentForm";
 
 const HeroSection = () => {
   const marqueeRef = useRef(null);
+  const [isEnrollFormOpen, setIsEnrollFormOpen] = useState(false);
   
   const brands = [
     "carmax.png",
@@ -52,15 +54,15 @@ const HeroSection = () => {
               AI-Powered Browser Integrations That Save You Time, Eliminates Errors, and Drive Growth
             </p>
             <div className="space-x-4 mt-10 mb-10">
-              <a
-                href="#contact"
-                className="bg-[#F49F1C] text-black px-10 py-3 rounded-full hover:bg-[#EC8C66] transition-colors duration-200"
+              <button
+                onClick={() => setIsEnrollFormOpen(true)}
+                className="bg-[#F49F1C] text-black px-10 py-3 rounded-full hover:bg-[#EC8C66] transition-colors duration-200 inline-block"
               >
-                Contact Us
-              </a>
+                Enroll
+              </button>
               <a
                 href="#features"
-                className="border border-white px-10 py-3 rounded-full text-white hover:bg-white hover:text-black transition-colors duration-200"
+                className="border border-white px-10 py-3 rounded-full text-white hover:bg-white hover:text-black transition-colors duration-200 inline-block"
               >
                 Learn More
               </a>
@@ -114,6 +116,12 @@ const HeroSection = () => {
             </p>
         </div>
       </div>
+
+      {/* Enrollment Form Modal */}
+      <EnrollmentForm 
+        isOpen={isEnrollFormOpen} 
+        onClose={() => setIsEnrollFormOpen(false)} 
+      />
     </>
   );
 };
