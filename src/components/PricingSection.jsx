@@ -15,6 +15,17 @@ const CheckIcon = ({ color = "#F49F1C", className = "" }) => (
   </svg>
 );
 
+const DashIcon = ({ className = "" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 16 16"
+    className={className}
+  >
+    <circle cx="8" cy="8" r="7" fill="#3A3A3A" />
+    <rect x="4" y="7" width="8" height="2" rx="1" fill="#2A2A2A" />
+  </svg>
+);
+
 // Plan Comparison Modal Component
 const PlanComparisonModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -211,13 +222,7 @@ const PricingSection = () => {
 
   const handleTalkToSales = () => {
     const emailSubject = 'Sales Inquiry - Web Bridge Pro';
-    const emailBody = `Hi,
-
-I would like to discuss pricing plans and learn more about Web Bridge Pro.
-
-Please contact me to schedule a consultation.
-
-Best regards`;
+    const emailBody = `Hi, I would like to discuss pricing plans and learn more about Web Bridge Pro.  Please contact me to schedule a consultation. Best regards`;
     
     // Open email client with pre-filled content
     window.location.href = `mailto:ksimmons@autodealerpro.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
@@ -225,44 +230,57 @@ Best regards`;
 
   const plans = [
     {
-      name: "Silver",
-      price: "$99",
+      name: "Basic Plan",
+      price: "$199",
       features: [
-        { text: "All Free Features", active: true },
-        { text: "1 User", active: true },
-        { text: "Chat GPT Intergration", active: true },
-        { text: "Access to SmartDMS marketplace", active: true },
-        { text: "Integrations", active: false },
-        { text: "Unlimited Auction integrations", active: false },
-        { text: "Unlimited Lender & Loan integrations", active: false },
+        { text: "1 Vendor, 1 Auction & 1 Loan Integration", active: true },
+        { text: "Limited Address Bar Integration", active: true },
+        { text: "Limited Window Hubs", active: true },
+        { text: "Payment Calculator", active: true },
+        { text: "Custom Dealership Forms", active: true },
+        { text: "State IADA Resources", active: true },
+        { text: "SmartDMS Marketplace", active: true },
+        { text: "Single User", active: true },
+        { text: "1 Location", active: true },
+        { text: "Pymt Calculator w/DMS Link", active: false },
+        { text: "Multiple Locations", active: false },
+        { text: "Remote Scheduled Automations", active: false },
       ],
       buttonClass: "bg-gray-800 hover:bg-gray-700",
     },
     {
-      name: "Gold",
+      name: "Unlimited Plan",
       price: "$399",
+      popular: true,
       features: [
-        { text: "All Free Features", active: true },
-        { text: "3 Users", active: true },
-        { text: "Chat GPT Intergration", active: true },
-        { text: "Access to SmartDMS marketplace", active: true },
-        { text: "3 Integrations", active: true },
-        { text: "Unlimited Auction integrations", active: true },
-        { text: "Unlimited Lender & Loan integrations", active: false },
+        { text: "Unlimited Vendor Integrations", active: true },
+        { text: "Address Bar Integrations", active: true },
+        { text: "Intelligent Window Hubs", active: true },
+        { text: "Pymt Calculator w/DMS Link", active: true },
+        { text: "Custom Dealership Forms", active: true },
+        { text: "State IADA Resources", active: true },
+        { text: "SmartDMS Marketplace", active: true },
+        { text: "1-5 Users", active: true },
+        { text: "1 Location", active: true },
+        { text: "Multiple Locations", active: false },
+        { text: "Remote Scheduled Automations", active: false },
       ],
       buttonClass: "bg-yellow-400 text-black font-semibold hover:bg-yellow-300",
     },
     {
-      name: "Platinum",
+      name: "Enterprise Plan",
       price: "$599",
       features: [
-        { text: "All Free Features", active: true },
-        { text: "5 Users", active: true },
-        { text: "Chat GPT Intergration", active: true },
-        { text: "Access to SmartDMS marketplace", active: true },
-        { text: "5 Integrations", active: true },
-        { text: "Unlimited Auction integrations", active: true },
-        { text: "Unlimited Lender & Loan integrations", active: true },
+        { text: "Unlimited Vendor Integrations", active: true },
+        { text: "Address Bar Integrations", active: true },
+        { text: "Intelligent Window Hubs", active: true },
+        { text: "Pymt Calculator w/DMS Link", active: true },
+        { text: "Custom Dealership Forms", active: true },
+        { text: "State IADA Resources", active: true },
+        { text: "SmartDMS Marketplace", active: true },
+        { text: "6-10 Users", active: true },
+        { text: "Multiple Locations", active: true },
+        { text: "Remote Scheduled Automations", active: true },
       ],
       buttonClass: "bg-gray-800 hover:bg-gray-700",
     },
@@ -281,20 +299,31 @@ Best regards`;
           {plans.map((plan, i) => (
             <div
               key={i}
-              className="p-[1px] rounded-2xl bg-gradient-to-br from-[#FF8700] to-[#EC8C66] min-w-[300px]"
+              className={`p-[1px] rounded-2xl bg-gradient-to-br from-[#FF8700] to-[#EC8C66] min-w-[300px] ${plan.popular ? "md:scale-105 z-10 shadow-lg shadow-orange-500/20" : ""}`}
             >
-              <div className="bg-black p-8 rounded-2xl h-full">
+              <div className="bg-black p-8 rounded-2xl h-full flex flex-col">
+                {plan.popular && (
+                  <div className="text-center -mt-1 mb-4">
+                    <span className="bg-[#FF8700] text-black text-xs font-bold px-3 py-1 rounded-full">
+                      Most Popular
+                    </span>
+                  </div>
+                )}
                 <h3 className="text-sm mb-4 text-left">{plan.name}</h3>
                 <p className="mb-12 text-left text-4xl">{plan.price}<span className="text-sm font-normal">/month</span></p>
                 <p className="text-left text-sm text-[#FF8700] font-medium -mt-10 mb-8">30-Day Free Trial</p>
-                <ul className="text-left space-y-8 mb-8 text-white text-sm font-light">
+                <ul className="text-left space-y-5 mb-8 text-white text-sm font-light flex-grow">
                   {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center space-x-2">
-                      <CheckIcon 
-                        color={feature.active ? "#F49F1C" : "#3A3A3A"} 
-                        className="flex-shrink-0 w-6 h-6"
-                      />
-                      <span className={feature.active ? "" : "text-gray-600"}>
+                    <li key={idx} className={`flex items-center space-x-2 ${!feature.active ? "opacity-100" : ""}`}>
+                      {feature.active ? (
+                        <CheckIcon
+                          color="#F49F1C"
+                          className="flex-shrink-0 w-6 h-6"
+                        />
+                      ) : (
+                        <DashIcon className="flex-shrink-0 w-6 h-6" />
+                      )}
+                      <span className={!feature.active ? "text-gray-600 line-through" : ""}>
                         {feature.text}
                       </span>
                     </li>
@@ -302,7 +331,7 @@ Best regards`;
                 </ul>
                 <button
                   onClick={() => handleGetStarted(plan)}
-                  className="mt-16 w-full py-3 rounded-2xl transition-colors duration-200 hover:bg-[#FF8700] hover:text-black border border-white/20"
+                  className="mt-auto w-full py-3 rounded-2xl transition-colors duration-200 hover:bg-[#FF8700] hover:text-black border border-white/20"
                 >
                   Get Started
                 </button>
