@@ -17,6 +17,9 @@
     --marquee-elements-displayed: 6;    
     --marquee-element-width: calc(var(--marquee-width) / var(--marquee-elements-displayed));
     --marquee-animation-duration: calc(var(--marquee-elements) * 3s);
+    --wb-ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+    --wb-duration-fast: 220ms;
+    --wb-duration-base: 340ms;
 }   
 
 html {
@@ -87,6 +90,21 @@ button {
 
 .animate-slideDown {
     animation: slideDown 0.3s ease-out;
+}
+
+@keyframes wbFadeUpIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.wb-view-enter {
+    animation: wbFadeUpIn var(--wb-duration-base) var(--wb-ease-smooth) both;
 }
 
 /* Marquee styles */
@@ -184,5 +202,14 @@ button {
 @media (min-width: 1441px) {
     :root {
         --marquee-elements-displayed: 7;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wb-view-enter,
+    .fade-in-element,
+    .animate-slideDown {
+        animation: none !important;
+        transition-duration: 0ms !important;
     }
 }

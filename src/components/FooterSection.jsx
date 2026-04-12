@@ -1,6 +1,6 @@
 import React from "react";
 
-const FooterSection = () => {
+const FooterSection = ({ onContactUs }) => {
   const links = [
     { name: "Home", href: "#hero" },
     { name: "About us", href: "#testimonials" },
@@ -66,15 +66,32 @@ const FooterSection = () => {
               {/* Quick Links */}
               <h5 className="text-sm font-semibold mb-4 text-gray-300">Quick Links</h5>
               <div className="flex flex-row space-x-2 mb-8">
-                {links.map((link, i) => (
-                  <a 
-                    key={i} 
-                    href={link.href} 
-                    className="text-gray-400 hover:text-[#FF8700] transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
-                ))}
+                {links.map((link, i) => {
+                  const isContactLink = link.name.toLowerCase() === "contact us";
+
+                  if (isContactLink && typeof onContactUs === "function") {
+                    return (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={onContactUs}
+                        className="text-gray-400 hover:text-[#FF8700] transition-colors text-sm"
+                      >
+                        {link.name}
+                      </button>
+                    );
+                  }
+
+                  return (
+                    <a
+                      key={i}
+                      href={link.href}
+                      className="text-gray-400 hover:text-[#FF8700] transition-colors text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  );
+                })}
               </div>
 
               {/* Social Links */}

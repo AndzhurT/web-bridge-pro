@@ -1,42 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
-import FeaturesSection from "./components/FeaturesSection";
-// import ToolsSection from "./components/ToolsSection";
-import NewToolsSection from "./components/NewToolsSection";
-
-import PricingSection from "./components/PricingSection";
-import TestimonialsSection from "./components/TestimonialsSection";
-import FooterSection from "./components/FooterSection";
+import HomePage from "./pages/HomePage";
+import DealerResources from "./pages/DealerResources";
+import VendorResources from "./pages/VendorResources";
 import ChatBot from "./components/ChatBot";
+import EnrollmentForm from "./components/EnrollmentForm";
 
 const App = () => {
+  const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false);
+
   return (
     <div className="bg-black text-white scroll-smooth">
-      <Navbar />
-      <div id="hero" className="scroll-mt-24">
-        <HeroSection />
-      </div>
-      <div id="features" className="scroll-mt-24">
-        <FeaturesSection />
-      </div>
-      {/* <div id="tools" className="scroll-mt-24">
-            <ToolsSection />
-        </div> */}
-      <div id="tools" className="scroll-mt-24">
-        <NewToolsSection />
-      </div>
-      <div id="pricing" className="scroll-mt-24">
-        <PricingSection />
-      </div>
-      <div id="testimonials" className="scroll-mt-24">
-        <TestimonialsSection />
-      </div>
-      <div id="contact" className="scroll-mt-24">
-        <FooterSection />
-      </div>
-      
-      {/* Floating AI Chatbot */}
+      <Navbar onContactClick={() => setIsEnrollmentOpen(true)} />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/dealer-resources" element={<DealerResources />} />
+        <Route path="/vendor-resources" element={<VendorResources />} />
+      </Routes>
+      <EnrollmentForm
+        isOpen={isEnrollmentOpen}
+        onClose={() => setIsEnrollmentOpen(false)}
+      />
       <ChatBot />
     </div>
   );
