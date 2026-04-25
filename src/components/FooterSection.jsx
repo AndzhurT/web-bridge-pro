@@ -1,11 +1,13 @@
 import React from "react";
+import Button from "./ui/Button";
 
 const FooterSection = ({ onContactUs }) => {
   const links = [
-    { name: "Home", href: "#hero" },
-    { name: "About us", href: "#testimonials" },
-    { name: "Pricing", href: "#pricing" },
-    { name: "Contact us", href: "#contact" },
+    { name: "Paths", href: "#hero" },
+    { name: "Workflows", href: "#features" },
+    { name: "Platform", href: "#tools" },
+    { name: "Use Cases", href: "#pricing" },
+    { name: "Impact", href: "#testimonials" },
   ];
 
   const socialLinks = [
@@ -48,54 +50,46 @@ const FooterSection = ({ onContactUs }) => {
   ];
 
   return (
-    <footer className="bg-black text-white py-12">
+    <footer className="border-t border-white/10 bg-[#0d1418] py-12 text-white">
       <div className="max-w-6xl mx-auto px-8">
-        <div className="flex flex-col md:flex-row justify-between items-start space-y-8 md:space-y-0">
+        <div className="flex flex-col items-start justify-between gap-8 rounded-[32px] border border-white/10 bg-[#101a20]/70 p-8 shadow-2xl shadow-black/15 md:flex-row">
           {/* Brand Section */}
           <div className="md:flex-1 md:pr-8 space-y-2">
             <img src="/images/web_bridge.png" alt="WebBridgePro" className="h-6" />
-            <p className="text-gray-400 text-sm mb-4 max-w-sm">
+            <p className="mb-4 max-w-sm text-sm leading-7 text-white/62">
               Empowering businesses with cutting-edge browser integration solutions for unparalleled efficiency.
             </p>
-            <p className="text-xs text-gray-500">© WebBridge Pro Inc 2025</p>
+            <p className="text-xs text-white/42">© WebBridge Pro Inc 2025</p>
           </div>
 
           {/* Right Column: Links and Social */}
           <div className="md:flex-shrink-0">
             <div>
               {/* Quick Links */}
-              <h5 className="text-sm font-semibold mb-4 text-gray-300">Quick Links</h5>
-              <div className="flex flex-row space-x-2 mb-8">
-                {links.map((link, i) => {
-                  const isContactLink = link.name.toLowerCase() === "contact us";
-
-                  if (isContactLink && typeof onContactUs === "function") {
-                    return (
-                      <button
-                        key={i}
-                        type="button"
-                        onClick={onContactUs}
-                        className="text-gray-400 hover:text-[#FF8700] transition-colors text-sm"
-                      >
-                        {link.name}
-                      </button>
-                    );
-                  }
-
-                  return (
-                    <a
-                      key={i}
-                      href={link.href}
-                      className="text-gray-400 hover:text-[#FF8700] transition-colors text-sm"
-                    >
-                      {link.name}
-                    </a>
-                  );
-                })}
+              <h5 className="mb-4 text-sm font-semibold text-white/78">Quick Links</h5>
+              <div className="mb-8 flex flex-row flex-wrap gap-2">
+                {links.map((link, i) => (
+                  <a
+                    key={i}
+                    href={link.href}
+                    className="rounded-full px-4 py-2 text-sm text-white/62 transition-colors hover:bg-white/[0.06] hover:text-white"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+                {typeof onContactUs === "function" && (
+                  <Button
+                    onClick={onContactUs}
+                    size="sm"
+                    className="rounded-full"
+                  >
+                    Contact us
+                  </Button>
+                )}
               </div>
 
               {/* Social Links */}
-              <h5 className="text-sm font-semibold mb-4 text-gray-300">Connect With Us</h5>
+              <h5 className="mb-4 text-sm font-semibold text-white/78">Connect With Us</h5>
               <div className="flex space-x-4">
                 {socialLinks.map((social, i) => (
                   <a
@@ -103,14 +97,14 @@ const FooterSection = ({ onContactUs }) => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#FF8700] transition-colors p-2 hover:bg-gray-800 rounded-lg"
+                    className="rounded-2xl border border-white/10 bg-white/[0.035] p-2 text-white/58 transition-colors hover:border-[#f49f1c]/40 hover:text-[#ffd08a]"
                     aria-label={social.name}
                   >
                     {social.icon}
                   </a>
                 ))}
               </div>
-              <p className="text-xs text-gray-500 mt-4">
+              <p className="mt-4 text-xs text-white/42">
                 Questions? Reach out anytime!
               </p>
             </div>
@@ -118,12 +112,12 @@ const FooterSection = ({ onContactUs }) => {
         </div>
 
         {/* Divider and Additional Info */}
-        <div className="border-t border-gray-800 mt-8 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+        <div className="mt-8 border-t border-white/10 pt-6">
+          <div className="flex flex-col items-center justify-between text-xs text-white/42 md:flex-row">
             <p>Built with care for automotive dealers and businesses worldwide.</p>
             <div className="flex space-x-4 mt-2 md:mt-0">
-              <a href="#" className="hover:text-gray-400 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-gray-400 transition-colors">Terms of Service</a>
+              <a href="#" className="transition-colors hover:text-white/70">Privacy Policy</a>
+              <a href="#" className="transition-colors hover:text-white/70">Terms of Service</a>
             </div>
           </div>
         </div>

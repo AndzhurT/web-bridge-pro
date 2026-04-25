@@ -14,7 +14,10 @@ const App = () => {
     <div className="bg-black text-white scroll-smooth">
       <Navbar onContactClick={() => setIsEnrollmentOpen(true)} />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/"
+          element={<HomePage onContactClick={() => setIsEnrollmentOpen(true)} />}
+        />
         <Route path="/dealer-resources" element={<DealerResources />} />
         <Route path="/vendor-resources" element={<VendorResources />} />
       </Routes>

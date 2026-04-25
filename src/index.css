@@ -26,28 +26,6 @@ html {
     scroll-behavior: smooth;
 }
 
-#hero {
-    min-height: 1400px;
-}
-
-#features {
-    min-height: 1200px;
-}
-
-#tools {
-    min-height: 800px;
-}
-
-#pricing {
-    min-height: 1300px;
-}
-
-#contact {
-    min-height: 300px;
-}
-
-
-
 button {
     cursor: pointer;
 }
@@ -165,13 +143,6 @@ button {
 }
 
 @media (max-width: 768px) {
-    #pricing {
-      min-height: 1000px;
-    }
-    #contact {
-      min-height: 100px;
-    }
-    
     :root {
         --marquee-width: 100vw;
         --marquee-height: 16vh;

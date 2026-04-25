@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
+import Button from "./ui/Button";
+
+const fieldClass =
+  "w-full rounded-2xl border border-white/10 bg-white/[0.045] px-4 py-3 text-white placeholder:text-white/34 transition-colors focus:border-[#f49f1c]/70 focus:outline-none focus:ring-2 focus:ring-[#f49f1c]/20";
+const labelClass = "mb-2 block text-sm font-medium text-white/72";
+const sectionClass = "space-y-4 border-t border-white/10 pt-5";
+const toggleClass =
+  "flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.045] p-4 text-left transition-colors duration-200 hover:border-[#f49f1c]/45 hover:bg-white/[0.07]";
 
 const EnrollmentForm = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -112,7 +120,7 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
           });
           return;
         }
-      } catch (apiError) {
+      } catch {
         console.log('API not available (local dev mode), using direct Supabase connection...');
       }
 
@@ -157,21 +165,24 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div 
-      className={`fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto transition-opacity duration-300 ${
-        isAnimating ? 'bg-black bg-opacity-75' : 'bg-black bg-opacity-0'
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-4 transition-opacity duration-300 ${
+        isAnimating ? 'bg-black/80' : 'bg-black/0'
       }`}
-      style={{ backdropFilter: 'blur(4px)' }}
+      style={{ backdropFilter: 'blur(10px)' }}
     >
-      <div 
-        className={`relative bg-gray-900 rounded-2xl max-w-3xl w-full my-8 border-2 border-[#F49F1C] max-h-[90vh] overflow-y-auto transition-all duration-300 ${
+      <div
+        className={`relative my-6 max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-[32px] border border-[#f49f1c]/35 bg-[#0d1418] shadow-2xl shadow-black/40 transition-all duration-300 ${
           isAnimating ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'
         }`}
       >
         {/* Close Button */}
-        <button
+        <Button
           onClick={handleClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10"
+          variant="ghost"
+          size="icon"
+          className="absolute right-4 top-4 z-10 rounded-xl"
+          aria-label="Close enrollment form"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -187,24 +198,31 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
               d="M6 18L18 6M6 6l12 12"
             />
           </svg>
-        </button>
+        </Button>
 
         {/* Form Header */}
-        <div className="bg-gray-800 p-8 rounded-t-2xl border-b-2 border-[#F49F1C]">
-          <h2 className="text-3xl font-bold text-white">Enrollment Form</h2>
-          <p className="text-gray-300 mt-2">Join the Web Bridge Pro network</p>
+        <div className="border-b border-white/10 bg-[linear-gradient(135deg,rgba(244,159,28,0.18),rgba(255,255,255,0.04))] p-6 md:p-8">
+          <div className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-[#f49f1c]">
+            Request access
+          </div>
+          <h2 className="text-3xl font-semibold tracking-tight text-white">
+            Enrollment Form
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-white/68">
+            Join the Web Bridge Pro network.
+          </p>
         </div>
 
         {/* Form Content */}
-        <form onSubmit={handleSubmit} className="p-8 space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5 p-6 md:p-8">
           {/* Required Fields Section */}
           <div className="space-y-4">
-            <h3 className="text-xl font-semibold text-white mb-4">
-              Basic Information <span className="text-[#F49F1C]">*Required</span>
+            <h3 className="mb-4 text-xl font-semibold text-white">
+              Basic Information <span className="text-[#f49f1c]">*Required</span>
             </h3>
 
             <div>
-              <label className="block text-gray-300 mb-2">
+              <label className={labelClass}>
                 Dealership Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -213,13 +231,13 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
                 value={formData.dealership}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                className={fieldClass}
                 placeholder="Enter dealership name"
               />
             </div>
 
             <div>
-              <label className="block text-gray-300 mb-2">
+              <label className={labelClass}>
                 Contact Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -228,13 +246,13 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
                 value={formData.contactName}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                className={fieldClass}
                 placeholder="Enter your name"
               />
             </div>
 
             <div>
-              <label className="block text-gray-300 mb-2">
+              <label className={labelClass}>
                 Address <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -243,14 +261,14 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
                 onChange={handleInputChange}
                 required
                 rows="3"
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                className={fieldClass}
                 placeholder="Enter complete address"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-gray-300 mb-2">
+                <label className={labelClass}>
                   Phone Number <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -259,13 +277,13 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                  className={fieldClass}
                   placeholder="(555) 123-4567"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-300 mb-2">
+                <label className={labelClass}>
                   Number of Locations <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -275,7 +293,7 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
                   onChange={handleInputChange}
                   required
                   min="1"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                  className={fieldClass}
                   placeholder="1"
                 />
               </div>
@@ -283,45 +301,45 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
           </div>
 
           {/* Optional Fields Section */}
-          <div className="space-y-4 pt-6 border-t border-gray-700">
-            <h3 className="text-xl font-semibold text-white mb-4">
-              Additional Information <span className="text-gray-500">(Optional)</span>
+          <div className={sectionClass}>
+            <h3 className="mb-4 text-xl font-semibold text-white">
+              Additional Information <span className="text-white/42">(Optional)</span>
             </h3>
 
             <div>
-              <label className="block text-gray-300 mb-2">Email</label>
+              <label className={labelClass}>Email</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                className={fieldClass}
                 placeholder="email@dealership.com"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-gray-300 mb-2">Number of Users</label>
+                <label className={labelClass}>Number of Users</label>
                 <input
                   type="number"
                   name="numberOfUsers"
                   value={formData.numberOfUsers}
                   onChange={handleInputChange}
                   min="1"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                  className={fieldClass}
                   placeholder="5"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-300 mb-2">DMS Platform</label>
+                <label className={labelClass}>DMS Platform</label>
                 <input
                   type="text"
                   name="dmsPlatform"
                   value={formData.dmsPlatform}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                  className={fieldClass}
                   placeholder="e.g., VinSolutions"
                 />
               </div>
@@ -329,25 +347,25 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-gray-300 mb-2">CRM Platform</label>
+                <label className={labelClass}>CRM Platform</label>
                 <input
                   type="text"
                   name="crmPlatform"
                   value={formData.crmPlatform}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                  className={fieldClass}
                   placeholder="e.g., Salesforce"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-300 mb-2">Website Host</label>
+                <label className={labelClass}>Website Host</label>
                 <input
                   type="text"
                   name="websiteHost"
                   value={formData.websiteHost}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                  className={fieldClass}
                   placeholder="e.g., Dealer.com"
                 />
               </div>
@@ -355,25 +373,25 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-gray-300 mb-2">Accounting</label>
+                <label className={labelClass}>Accounting</label>
                 <input
                   type="text"
                   name="accounting"
                   value={formData.accounting}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                  className={fieldClass}
                   placeholder="e.g., QuickBooks"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-300 mb-2">Payroll Portal</label>
+                <label className={labelClass}>Payroll Portal</label>
                 <input
                   type="text"
                   name="payrollPortal"
                   value={formData.payrollPortal}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                  className={fieldClass}
                   placeholder="e.g., ADP"
                 />
               </div>
@@ -381,18 +399,18 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
           </div>
 
           {/* Inventory Workflow Section */}
-          <div className="space-y-4 pt-6 border-t border-gray-700">
+          <div className={sectionClass}>
             <button
               type="button"
               onClick={() => toggleSection("inventoryWorkflow")}
-              className="w-full flex items-center justify-between text-left bg-gray-800 hover:bg-gray-750 p-4 rounded-lg transition-all duration-200 hover:border-[#F49F1C] border-2 border-transparent"
+              className={toggleClass}
             >
               <h3 className="text-xl font-semibold text-white">
-                Inventory Workflow <span className="text-gray-500">(Optional)</span>
+                Inventory Workflow <span className="text-white/42">(Optional)</span>
               </h3>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className={`h-6 w-6 text-[#F49F1C] transition-transform duration-300 ${
+                className={`h-6 w-6 text-[#f49f1c] transition-transform duration-300 ${
                   expandedSections.inventoryWorkflow ? "rotate-180" : ""
                 }`}
                 fill="none"
@@ -404,8 +422,8 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
             </button>
 
             {expandedSections.inventoryWorkflow && (
-              <div className="pl-4 animate-slideDown">
-                <p className="text-gray-400 text-sm mb-3">
+              <div className="animate-slideDown pl-2 md:pl-4">
+                <p className="mb-3 text-sm leading-6 text-white/62">
                   List your inventory tools and services (e.g., Auctions, Transport, Floor Plans, History Reports, GPS Tracking, Valuations, Website Hosts)
                 </p>
                 <textarea
@@ -413,7 +431,7 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
                   value={formData.inventoryWorkflow}
                   onChange={handleInputChange}
                   rows="4"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                  className={fieldClass}
                   placeholder="Example: Manheim Auctions, Central Dispatch, NextGear Floor Plan, Carfax, GoldStar GPS..."
                 />
               </div>
@@ -421,18 +439,18 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
           </div>
 
           {/* Deals Workflow Section */}
-          <div className="space-y-4 pt-6 border-t border-gray-700">
+          <div className={sectionClass}>
             <button
               type="button"
               onClick={() => toggleSection("dealsWorkflow")}
-              className="w-full flex items-center justify-between text-left bg-gray-800 hover:bg-gray-750 p-4 rounded-lg transition-all duration-200 hover:border-[#F49F1C] border-2 border-transparent"
+              className={toggleClass}
             >
               <h3 className="text-xl font-semibold text-white">
-                Deals Workflow <span className="text-gray-500">(Optional)</span>
+                Deals Workflow <span className="text-white/42">(Optional)</span>
               </h3>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className={`h-6 w-6 text-[#F49F1C] transition-transform duration-300 ${
+                className={`h-6 w-6 text-[#f49f1c] transition-transform duration-300 ${
                   expandedSections.dealsWorkflow ? "rotate-180" : ""
                 }`}
                 fill="none"
@@ -444,8 +462,8 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
             </button>
 
             {expandedSections.dealsWorkflow && (
-              <div className="pl-4 animate-slideDown">
-                <p className="text-gray-400 text-sm mb-3">
+              <div className="animate-slideDown pl-2 md:pl-4">
+                <p className="mb-3 text-sm leading-6 text-white/62">
                   List your deals and finance tools (e.g., Credit Bureaus, Lenders, Warranty Providers, F&I Portals, State DMV, Compliance, CRM, Payment Processors)
                 </p>
                 <textarea
@@ -453,7 +471,7 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
                   value={formData.dealsWorkflow}
                   onChange={handleInputChange}
                   rows="4"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#F49F1C] transition-colors"
+                  className={fieldClass}
                   placeholder="Example: Equifax, Chase Auto Finance, JM&A Warranty, DealerTrack F&I, Texas DMV..."
                 />
               </div>
@@ -461,20 +479,23 @@ const EnrollmentForm = ({ isOpen, onClose }) => {
           </div>
 
           {/* Submit Button */}
-          <div className="flex gap-4 pt-6">
-            <button
+          <div className="flex flex-col gap-4 border-t border-white/10 pt-5 sm:flex-row">
+            <Button
               type="button"
               onClick={handleClose}
-              className="flex-1 px-6 py-3 border-2 border-gray-600 rounded-full text-white hover:bg-gray-800 hover:border-[#F49F1C] transition-all duration-200"
+              variant="outline"
+              size="lg"
+              className="flex-1 rounded-full"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
-              className="flex-1 px-6 py-3 bg-[#F49F1C] text-black font-semibold rounded-full hover:bg-[#EC8C66] transition-all duration-200 transform hover:scale-105"
+              size="lg"
+              className="flex-1 rounded-full"
             >
               Submit Enrollment
-            </button>
+            </Button>
           </div>
         </form>
       </div>
