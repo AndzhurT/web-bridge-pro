@@ -333,7 +333,8 @@ What specific information are you looking for today?`
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="bg-[#F49F1C] hover:bg-[#EC8C66] text-white rounded-full p-4 shadow-lg transition-all duration-300 hover:scale-110"
+          className="rounded-full border border-[#f49f1c]/45 bg-[#f49f1c] p-4 text-[#111b20] shadow-2xl shadow-[#f49f1c]/25 transition-all duration-300 hover:scale-110 hover:bg-[#ffad35] focus:outline-none focus:ring-2 focus:ring-[#f49f1c]/60 focus:ring-offset-2 focus:ring-offset-[#0d1418]"
+          aria-label={isOpen ? "Close WebBridge Assistant" : "Open WebBridge Assistant"}
         >
           {isOpen ? (
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -349,21 +350,22 @@ What specific information are you looking for today?`
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-96 h-[600px] bg-white rounded-2xl shadow-2xl z-50 border border-gray-200 flex flex-col">
+        <div className="fixed bottom-24 right-4 z-50 flex h-[600px] w-[calc(100vw-2rem)] max-w-96 flex-col overflow-hidden rounded-[32px] border border-white/10 bg-[#0d1418] text-white shadow-2xl shadow-black/40 sm:right-6 sm:w-96">
           {/* Header */}
-          <div className="bg-[#F49F1C] text-white p-4 rounded-t-2xl flex items-center justify-between">
+          <div className="flex items-center justify-between border-b border-white/10 bg-[linear-gradient(135deg,rgba(244,159,28,0.20),rgba(255,255,255,0.04))] p-4">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                <span className="text-[#F49F1C] font-bold text-sm">WB</span>
+              <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[#f49f1c] shadow-lg shadow-[#f49f1c]/20">
+                <span className="text-sm font-black text-[#111b20]">WB</span>
               </div>
               <div>
-                <h3 className="font-semibold">WebBridge Assistant</h3>
-                <p className="text-xs opacity-90">Online • Typically replies instantly</p>
+                <h3 className="font-semibold tracking-tight">WebBridge Assistant</h3>
+                <p className="text-xs text-white/62">Online • Typically replies instantly</p>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white hover:text-gray-200 transition-colors"
+              className="rounded-xl p-2 text-white/62 transition-colors hover:bg-white/[0.06] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#f49f1c]/60"
+              aria-label="Close WebBridge Assistant"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -372,21 +374,21 @@ What specific information are you looking for today?`
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div className="flex-1 space-y-4 overflow-y-auto bg-[radial-gradient(circle_at_10%_0%,rgba(244,159,28,0.11),transparent_32%)] p-4">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[80%] p-3 rounded-2xl ${
+                  className={`max-w-[80%] rounded-2xl border p-3 shadow-lg ${
                     message.sender === 'user'
-                      ? 'bg-[#F49F1C] text-white'
-                      : 'bg-gray-100 text-gray-800'
+                      ? 'border-[#f49f1c]/40 bg-[#f49f1c] text-[#111b20] shadow-[#f49f1c]/10'
+                      : 'border-white/10 bg-white/[0.06] text-white shadow-black/10'
                   }`}
                 >
                   <div className="whitespace-pre-wrap text-sm">{message.text}</div>
-                  <div className={`text-xs mt-1 ${message.sender === 'user' ? 'text-orange-100' : 'text-gray-500'}`}>
+                  <div className={`mt-1 text-xs ${message.sender === 'user' ? 'text-[#111b20]/60' : 'text-white/42'}`}>
                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </div>
                 </div>
@@ -396,25 +398,25 @@ What specific information are you looking for today?`
             {/* Typing indicator */}
             {isTyping && (
               <div className="flex justify-start">
-                <div className="bg-gray-100 p-3 rounded-2xl">
+                <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-3">
                   <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="h-2 w-2 animate-bounce rounded-full bg-[#f49f1c]"></div>
+                    <div className="h-2 w-2 animate-bounce rounded-full bg-[#f49f1c]" style={{ animationDelay: '0.1s' }}></div>
+                    <div className="h-2 w-2 animate-bounce rounded-full bg-[#f49f1c]" style={{ animationDelay: '0.2s' }}></div>
                   </div>
                 </div>
               </div>
             )}
 
-                         {/* Quick responses (always visible when chat is open) */}
-             <div className="space-y-2 mt-4">
-               <p className="text-xs text-gray-500 text-center">Quick questions:</p>
+             {/* Quick responses (always visible when chat is open) */}
+             <div className="mt-4 space-y-2 rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+               <p className="text-center text-xs font-semibold uppercase tracking-[0.18em] text-[#f49f1c]">Quick questions</p>
                <div className="flex flex-wrap gap-2">
                  {quickResponses.map((response, index) => (
                    <button
                      key={index}
                      onClick={() => handleQuickResponse(response)}
-                     className="text-xs bg-gray-50 hover:bg-gray-100 text-gray-700 px-3 py-2 rounded-full border border-gray-200 transition-colors"
+                     className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-2 text-xs text-white/72 transition-colors hover:border-[#f49f1c]/45 hover:bg-white/[0.08] hover:text-white"
                    >
                      {response}
                    </button>
@@ -426,7 +428,7 @@ What specific information are you looking for today?`
           </div>
 
           {/* Input */}
-          <div className="p-4 border-t border-gray-200">
+          <div className="border-t border-white/10 bg-[#101a20]/90 p-4">
             <div className="flex space-x-2">
               <input
                 type="text"
@@ -434,19 +436,20 @@ What specific information are you looking for today?`
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Ask me anything about Web Bridge Pro..."
-                className="flex-1 p-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#F49F1C] focus:border-transparent text-sm bg-white text-gray-900 placeholder-gray-500"
+                className="flex-1 rounded-full border border-white/10 bg-white/[0.045] p-3 text-sm text-white placeholder:text-white/38 transition-colors focus:border-[#f49f1c]/70 focus:outline-none focus:ring-2 focus:ring-[#f49f1c]/20"
               />
               <button
                 onClick={handleSendMessage}
                 disabled={!inputValue.trim()}
-                className="bg-[#F49F1C] hover:bg-[#EC8C66] disabled:bg-gray-300 text-white p-3 rounded-full transition-colors"
+                className="rounded-full bg-[#f49f1c] p-3 text-[#111b20] transition-colors hover:bg-[#ffad35] disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/30"
+                aria-label="Send chat message"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                 </svg>
               </button>
             </div>
-            <p className="text-xs text-gray-500 mt-2 text-center">
+            <p className="mt-2 text-center text-xs text-white/42">
               Powered by WebBridge AI • For urgent issues call (215) 532-1743
             </p>
           </div>
