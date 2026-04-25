@@ -52,12 +52,12 @@ const Navbar = ({ onContactClick }) => {
 
   return (
     <header className="fixed top-0 left-0 z-50 w-full border-b border-white/10 bg-[#0d1418]/92 shadow-2xl shadow-black/20 backdrop-blur-xl">
-      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
+      <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 sm:py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3 transition-colors hover:border-[#f49f1c]/40"
+            className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.035] px-3 py-2.5 transition-colors hover:border-[#f49f1c]/40 sm:px-4 sm:py-3"
           >
             <img
               src="/images/web_bridge.png"
@@ -117,25 +117,25 @@ const Navbar = ({ onContactClick }) => {
         <div
           className={`md:hidden transition-all duration-300 ease-in-out ${
             isMenuOpen
-              ? "max-h-64 opacity-100 mt-4 border-t border-white/10 pt-4"
+              ? "mt-3 max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-white/10 pt-3 opacity-100"
               : "max-h-0 opacity-0 overflow-hidden"
           }`}
         >
-          <nav className="flex flex-col gap-2 pb-4">
+          <nav className="flex flex-col gap-2 pb-3">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.hash}
                 onClick={(e) => handleNavClick(e, item.hash)}
-                className="rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3 text-white/76 transition-colors duration-200 hover:border-[#f49f1c]/40 hover:text-white"
+                className="rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-2.5 text-sm text-white/76 transition-colors duration-200 hover:border-[#f49f1c]/40 hover:text-white"
               >
                 {item.label}
               </a>
             ))}
             <Button
               onClick={handleContactButtonClick}
-              size="lg"
-              className="mt-2 rounded-2xl"
+              size="md"
+              className="rounded-2xl"
             >
               Contact us
             </Button>

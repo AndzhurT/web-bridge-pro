@@ -350,7 +350,7 @@ What specific information are you looking for today?`
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-4 z-50 flex h-[600px] w-[calc(100vw-2rem)] max-w-96 flex-col overflow-hidden rounded-[32px] border border-white/10 bg-[#0d1418] text-white shadow-2xl shadow-black/40 sm:right-6 sm:w-96">
+        <div className="fixed bottom-20 right-3 z-50 flex h-[min(600px,calc(100dvh-6rem))] w-[calc(100vw-1.5rem)] max-w-96 flex-col overflow-hidden rounded-[28px] border border-white/10 bg-[#0d1418] text-white shadow-2xl shadow-black/40 sm:bottom-24 sm:right-6 sm:h-[600px] sm:w-96 sm:rounded-[32px]">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-white/10 bg-[linear-gradient(135deg,rgba(244,159,28,0.20),rgba(255,255,255,0.04))] p-4">
             <div className="flex items-center space-x-3">

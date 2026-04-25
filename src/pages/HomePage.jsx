@@ -124,8 +124,8 @@ const Badge = ({ children }) => (
 );
 
 const NumberCard = ({ number, title, text }) => (
-  <div className="rounded-[28px] border border-white/10 bg-white/[0.045] p-6 shadow-2xl shadow-black/10">
-    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#f49f1c] text-sm font-black text-[#111b20]">
+    <div className="rounded-[28px] border border-white/10 bg-white/[0.045] p-5 shadow-2xl shadow-black/10 sm:p-6">
+    <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#f49f1c] text-sm font-black text-[#111b20] sm:mb-5 sm:h-12 sm:w-12">
       {number}
     </div>
     <h3 className="text-xl font-semibold text-white">{title}</h3>
@@ -150,15 +150,15 @@ const HomePage = ({ onContactClick }) => {
       <main className="min-h-screen bg-[#0d1418] text-white">
         <section
           id="hero"
-          className="relative scroll-mt-24 overflow-hidden border-b border-white/10 pt-20"
+          className="relative scroll-mt-24 overflow-hidden border-b border-white/10 pt-[4.5rem] sm:pt-20"
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(244,159,28,0.22),transparent_26%),radial-gradient(circle_at_86%_18%,rgba(255,255,255,0.10),transparent_24%),linear-gradient(135deg,#101c22_0%,#0d1418_54%,#15100a_100%)]" />
-          <div className="relative mx-auto max-w-7xl px-6 py-6 lg:px-10">
-            <div className="flex flex-col gap-4 rounded-[24px] border border-white/10 bg-[#101a20]/80 px-5 py-4 backdrop-blur-xl md:flex-row md:items-center md:justify-between">
+          <div className="relative mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-6 lg:px-10">
+            <div className="flex flex-col gap-4 rounded-[24px] border border-white/10 bg-[#101a20]/80 px-4 py-4 backdrop-blur-xl md:flex-row md:items-center md:justify-between lg:px-5">
               <p className="text-sm text-white/62">
                 The World's 1st B2B Browser
               </p>
-              <div className="flex flex-wrap gap-2 rounded-full border border-white/10 bg-white/[0.04] p-1">
+              <div className="flex flex-wrap gap-2 rounded-[22px] border border-white/10 bg-white/[0.04] p-1 sm:rounded-full">
                 {Object.values(paths).map((path) => (
                   <Button
                     key={path.id}
@@ -173,7 +173,7 @@ const HomePage = ({ onContactClick }) => {
               </div>
             </div>
 
-            <div className="grid gap-6 py-8 lg:grid-cols-2 lg:py-10">
+            <div className="grid gap-4 py-6 sm:gap-6 sm:py-8 lg:grid-cols-2 lg:py-10">
               {Object.values(paths).map((path) => {
                 const active = selectedPath === path.id;
 
@@ -182,13 +182,13 @@ const HomePage = ({ onContactClick }) => {
                     key={path.id}
                     type="button"
                     onClick={() => setSelectedPath(path.id)}
-                    className={`group min-h-[320px] overflow-hidden rounded-[36px] border p-7 text-left transition-all duration-300 md:p-8 ${
+                    className={`group min-h-[280px] overflow-hidden rounded-[28px] border p-5 text-left transition-all duration-300 sm:rounded-[36px] sm:p-7 md:min-h-[320px] md:p-8 ${
                       active
                         ? "scale-[1.01] border-[#f49f1c]/70 bg-[#f49f1c]/15 shadow-2xl shadow-[#f49f1c]/15"
                         : "border-white/10 bg-white/[0.035] hover:border-white/25 hover:bg-white/[0.055]"
                     }`}
                   >
-                    <div className="mb-8 flex items-start justify-between gap-6">
+                    <div className="mb-6 flex items-start justify-between gap-4 sm:mb-8 sm:gap-6">
                       <div
                         className={`rounded-[24px] px-4 py-3 text-sm font-black tracking-[0.2em] ${
                           active
@@ -204,10 +204,10 @@ const HomePage = ({ onContactClick }) => {
                       <div className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-[#f49f1c]">
                         {path.eyebrow}
                       </div>
-                      <h1 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
+                      <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
                         {path.heroTitle}
                       </h1>
-                      <p className="mt-5 text-base leading-8 text-white/72">
+                      <p className="mt-4 text-base leading-7 text-white/72 sm:mt-5 sm:leading-8">
                         {path.heroText}
                       </p>
                     </div>
@@ -224,18 +224,18 @@ const HomePage = ({ onContactClick }) => {
 
         <section
           id="features"
-          className="mx-auto grid max-w-7xl scroll-mt-24 gap-10 px-6 py-14 lg:grid-cols-[0.9fr_1.1fr] lg:px-10 lg:py-16"
+          className="mx-auto grid max-w-7xl scroll-mt-24 gap-8 px-4 py-12 sm:px-6 sm:py-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10 lg:px-10 lg:py-16"
         >
           <div key={`${selectedPath}-copy`} className="wb-view-enter">
             <Badge>{current.eyebrow}</Badge>
-            <h2 className="mt-7 text-4xl font-semibold tracking-tight md:text-5xl">
+            <h2 className="mt-6 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
               {current.pain}
             </h2>
             <p className="mt-6 text-lg leading-8 text-white/72">
               {current.outcome}
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Button size="lg" onClick={handleContactClick}>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+              <Button size="lg" onClick={handleContactClick} className="w-full sm:w-auto">
                 Request a WebBridge Demo
                 <span className="ml-2" aria-hidden="true">
                   →
@@ -245,14 +245,15 @@ const HomePage = ({ onContactClick }) => {
                 variant="outline"
                 size="lg"
                 onClick={() => setSelectedPath(other.id)}
+                className="w-full sm:w-auto"
               >
                 Switch to {other.shortLabel}
               </Button>
             </div>
           </div>
 
-          <div key={`${selectedPath}-workflow`} className="wb-view-enter rounded-[36px] border border-white/10 bg-[#121d22] p-5 shadow-2xl shadow-black/20">
-            <div className="rounded-[28px] border border-[#f49f1c]/20 bg-[#0d1418] p-6">
+          <div key={`${selectedPath}-workflow`} className="wb-view-enter rounded-[28px] border border-white/10 bg-[#121d22] p-4 shadow-2xl shadow-black/20 sm:rounded-[36px] sm:p-5">
+            <div className="rounded-[24px] border border-[#f49f1c]/20 bg-[#0d1418] p-4 sm:rounded-[28px] sm:p-6">
               <div className="mb-6 text-sm font-semibold uppercase tracking-[0.22em] text-[#f49f1c]">
                 Example workflow routes
               </div>
@@ -285,7 +286,7 @@ const HomePage = ({ onContactClick }) => {
           id="tools"
           className="scroll-mt-24 border-y border-white/10 bg-white/[0.025]"
         >
-          <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10 lg:py-16">
+          <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-10 lg:py-16">
             <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
               <div>
                 <div className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[#f49f1c]">
@@ -316,7 +317,7 @@ const HomePage = ({ onContactClick }) => {
 
         <section
           id="pricing"
-          className="mx-auto max-w-7xl scroll-mt-24 px-6 py-14 lg:px-10 lg:py-16"
+          className="mx-auto max-w-7xl scroll-mt-24 px-4 py-12 sm:px-6 sm:py-14 lg:px-10 lg:py-16"
         >
           <div className="mb-10 max-w-3xl">
             <div className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[#f49f1c]">
@@ -340,9 +341,9 @@ const HomePage = ({ onContactClick }) => {
 
         <section
           id="testimonials"
-          className="mx-auto max-w-7xl scroll-mt-24 px-6 pb-14 lg:px-10 lg:pb-16"
+          className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-12 sm:px-6 sm:pb-14 lg:px-10 lg:pb-16"
         >
-          <div className="rounded-[40px] border border-[#f49f1c]/25 bg-[linear-gradient(135deg,rgba(244,159,28,0.20),rgba(244,159,28,0.06)_38%,rgba(255,255,255,0.04)_100%)] p-8 md:p-12">
+          <div className="rounded-[30px] border border-[#f49f1c]/25 bg-[linear-gradient(135deg,rgba(244,159,28,0.20),rgba(244,159,28,0.06)_38%,rgba(255,255,255,0.04)_100%)] p-5 sm:rounded-[40px] sm:p-8 md:p-12">
             <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <div>
                 <div className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-[#ffd08a]">
@@ -372,8 +373,8 @@ const HomePage = ({ onContactClick }) => {
                 ))}
               </div>
             </div>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Button size="lg" onClick={handleContactClick}>
+            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
+              <Button size="lg" onClick={handleContactClick} className="w-full sm:w-auto">
                 Start With {current.shortLabel}
                 <span className="ml-2" aria-hidden="true">
                   →
@@ -383,6 +384,7 @@ const HomePage = ({ onContactClick }) => {
                 variant="outline"
                 size="lg"
                 onClick={() => setSelectedPath(other.id)}
+                className="w-full sm:w-auto"
               >
                 Compare {other.shortLabel}
               </Button>
